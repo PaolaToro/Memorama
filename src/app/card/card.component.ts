@@ -6,6 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./card.component.css'],
 })
 export class CardComponent implements OnInit {
+  @Input() id: string;
+
   @Input() back: string;
   @Input() front: string;
 
@@ -21,6 +23,9 @@ export class CardComponent implements OnInit {
   }
 
   handleClick(event: Event) {
+    // Do no't use `event.stopPropagation()` we are bubling
+    // this event to the app component
+
     this.active = !this.active;
   }
 

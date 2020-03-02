@@ -7,7 +7,7 @@
   <section class="cards" (click)="handleClickOnCard($event)">
     <div class="row" *ngFor="let row of matrix">
       <div class="column" *ngFor="let column of row">
-        <app-card [back]="column.back" [front]="column.front" [disabled]="!start || disabled" ></app-card>
+        <app-card [back]="column.back" [front]="column.front" [id]="column.id" [disabled]="!start || disabled" ></app-card>
       </div>
     </div>
   </section>

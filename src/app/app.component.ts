@@ -64,17 +64,21 @@ export class AppComponent {
   generateCards(): Card[][] {
     const matrix = [];
 
+    const heroAssets = HEROES_ASSETS.map((src, index) => ({ src, id: index }));
+
     // The card assets are the doubles of cards
-    const cardsAssets = [].concat(HEROES_ASSETS, HEROES_ASSETS);
+    const cardsAssets = [].concat(heroAssets, heroAssets);
 
     // The carsd is a array of resources where the back is a constant
     // and the front is an image of a heroe
     const cards = new Array(this.rows * this.columns)
         .fill({})
         .map((_, i) => {
+          const asset = cardsAssets[i];
           return ({
+            id: asset.id,
             back: `${BASE_ASSET_PATH}/${COVER_ASSET}`,
-            front: `${BASE_ASSET_PATH}/${cardsAssets[i]}`
+            front: `${BASE_ASSET_PATH}/${asset.src}`
           });
         });
 

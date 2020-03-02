@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
-  constructor() { }
+  active: boolean;
+
+  constructor() {
+    this.active = false;
+  }
 
   ngOnInit(): void {
+  }
+
+  handleClick(event: Event) {
+    this.active = !this.active;
   }
 
 }

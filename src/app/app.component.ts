@@ -114,10 +114,13 @@ export class AppComponent {
   }
 
   startTimer() {
+    // TODO: implement a timer with setInterval
     this.timer = setTimeout(() => { console.log('time finish'); }, INTERVAL_TIME);
   }
 
-  restartTimer() {}
+  restartTimer() {
+    // TODO: call stop and start timer
+  }
 
   flipCard(id: number, state: boolean = true) {
     this.matrix.forEach((row, rowId) => {
@@ -162,14 +165,12 @@ export class AppComponent {
             // Clean displaying cards
             this.displayingCards = [];
 
+            // TODO: abstract this in a method
             // Change player
             this.player = this.player > 0 ? 0 : 1;
           }, 2000)  ;
         }
       }
-
-      // TODO: add the logic to decide what happen next
-      console.log('Click', card);
     }
   }
 }

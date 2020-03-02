@@ -1,8 +1,47 @@
-.cards {
+.title {
+  font-weight: bold;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.turn {
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.btn {
+  min-height: 2rem;
+  min-width: 10rem;
+  background: #03446A;
+  color: #FFF;
+  border: none;
+  border-radius: .5rem;
+  box-shadow: 0 0 15px rgba(255, 255, 255, .05);
+  transition: 300ms box-shadow ease-in-out;
+  cursor: pointer;
+}
+
+.btn:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 255, .1);
+}
+
+.bnt:active,
+.btn:focus {
+  outline: none;
+}
+
+.main {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.result p {
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
 }
 
 .row {
@@ -17,5 +56,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   padding: 1rem;
 }

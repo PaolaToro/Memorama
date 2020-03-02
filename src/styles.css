@@ -14,4 +14,5 @@ body {
   background: #333;
   /* 1em equals 10px, instead of the default 16px */
   font-size: 62.5%;
+  color: #EDEDED;
 }

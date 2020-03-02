@@ -1,24 +1,36 @@
 <main id="root">
   <header>
-    <h2>{{title}}</h2>
-    <span>{{time}}</span>
-    <span>Player 1 {{score[0]}}</span>
-    <span>Player 2 {{score[1]}}</span>
-    <button (click)="startGame($event)">Iniciar</button>
-    <p>Turno Player {{player + 1}}</p>
+    <h2 class="title">{{title}}</h2>
+    <!-- Dashboard -->
+    <div class="dashboard" *ngIf="start">
+      <div class="row">
+        <div class="column">
+          <h3>Puntuación</h3>
+          <p>Jugador 1: {{score[0]}}</p>
+          <p>Jugador 2: {{score[1]}}</p>
+        </div>
+        <div class="column">
+          <p>Cronometro: {{time}}</p>
+        </div>
+      </div>
+      <p class="turn">Turno Jugador {{player + 1}}</p>
+    </div>
   </header>
-  <section class="cards">
-    <div class="row" *ngFor="let row of matrix">
-      <div class="column" *ngFor="let column of row">
-        <app-card
-          [id]="column.id"
-          [heroeId]="column.heroeId"
-          [active]="column.active"
-          [disabled]="!start || disabled || column.disabled"
-          [back]="column.back"
-          [front]="column.front"
-          (flip)="handleClickOnCard($event)"
-        ></app-card>
+  <section class="main">
+    <button class="btn" *ngIf="!start" (click)="startGame($event)">Iniciar</button>
+    <div class="cards" *ngIf="start">
+      <div class="row" *ngFor="let row of matrix">
+        <div class="column" *ngFor="let column of row">
+          <app-card
+            [id]="column.id"
+            [heroeId]="column.heroeId"
+            [active]="column.active"
+            [disabled]="!start || disabled || column.disabled"
+            [back]="column.back"
+            [front]="column.front"
+            (flip)="handleClickOnCard($event)"
+          ></app-card>
+        </div>
       </div>
     </div>
   </section>

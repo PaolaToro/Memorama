@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
-const BASE_ASSET_PATH = 'assets';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -8,17 +6,13 @@ const BASE_ASSET_PATH = 'assets';
   styleUrls: ['./card.component.css'],
 })
 export class CardComponent implements OnInit {
+  @Input() back: string;
+  @Input() front: string;
 
   active: boolean;
 
-  back: string;
-  front: string;
-
   constructor() {
     this.active = false;
-
-    this.back = `${BASE_ASSET_PATH}/tapa.jpg`;
-    this.front = `${BASE_ASSET_PATH}/batman.jpg`;
   }
 
   ngOnInit(): void {

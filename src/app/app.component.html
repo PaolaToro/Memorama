@@ -1,9 +1,9 @@
 <main id="root">
   <h2>Memorama</h2>
   <section class="cards">
-    <div class="row">
-      <div class="column">
-        <app-card></app-card>
+    <div class="row" *ngFor="let row of matrix">
+      <div class="column" *ngFor="let column of row">
+        <app-card [back]="column.back" [front]="column.front"></app-card>
       </div>
     </div>
   </section>

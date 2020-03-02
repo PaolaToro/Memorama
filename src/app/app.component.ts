@@ -3,8 +3,6 @@ import { CardComponent } from './card/card.component';
 
 import shuffleArray from './helpers/shuffle-array';
 
-const MAX_DISPLAYING_CARDS = 2;
-
 // each player have 1 minute to play
 const INTERVAL_TIME = 60 * 1000;
 
@@ -28,6 +26,8 @@ const HEROES_ASSETS: readonly string[] = [
 ];
 
 interface Card {
+  id: number;
+  disabled: boolean;
   back: string;
   front: string;
 }
@@ -53,7 +53,7 @@ export class AppComponent {
   rows = 5;
   columns = 4;
 
-  displayingCards = 0;
+  displayingCards = [];
 
   matrix: Card[][];
 
@@ -77,6 +77,7 @@ export class AppComponent {
           const asset = cardsAssets[i];
           return ({
             id: asset.id,
+            disabled: false,
             back: `${BASE_ASSET_PATH}/${COVER_ASSET}`,
             front: `${BASE_ASSET_PATH}/${asset.src}`
           });
@@ -110,14 +111,11 @@ export class AppComponent {
     this.timer = setTimeout(() => { console.log('time finish'); }, INTERVAL_TIME);
   }
 
-  // Here we get the click from a bubble event of the card
-  handleClickOnCard(event: Event) {
-    event.stopPropagation();
-
+  handleClickOnCard(id: number) {
     if (this.start) {
-      this.displayingCards++;
+      this.displayingCards.push(id);
 
-      if (this.displayingCards > 1) {
+      if (this.displayingCards.length > 1) {
         this.disabled = true;
       }
 

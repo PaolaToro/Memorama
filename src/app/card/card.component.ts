@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -6,12 +6,14 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./card.component.css'],
 })
 export class CardComponent implements OnInit {
-  @Input() id: string;
+  @Input() id: number;
 
   @Input() back: string;
   @Input() front: string;
 
   @Input() disabled: boolean;
+
+  @Output() flip = new EventEmitter<number>();
 
   active: boolean;
 
@@ -23,10 +25,11 @@ export class CardComponent implements OnInit {
   }
 
   handleClick(event: Event) {
-    // Do no't use `event.stopPropagation()` we are bubling
-    // this event to the app component
+    event.stopPropagation();
 
     this.active = !this.active;
+
+    this.flip.emit(this.id);
   }
 
 }

@@ -1,10 +1,10 @@
 <div class="card" [ngClass]="{ 'active': active }" (click)="handleClick($event)">
   <div class="content">
-    <div class="front">
-      Front
-    </div>
     <div class="back">
-      Back!
+      <img [src]="back" alt="Back">
+    </div>
+    <div class="front">
+      <img [src]="front" alt="Front">
     </div>
   </div>
 </div>

@@ -1,7 +1,7 @@
 .card {
   position: relative;
   width: 8rem;
-  height: 8rem;
+  height: 10rem;
   perspective: 50rem;
 }
 
@@ -11,7 +11,8 @@
   right: 0;
   bottom: 0;
   left: 0;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  border-radius: .5rem;
+  box-shadow: 0 0 15px rgba(255, 255, 255, .1);
   transition: transform 1s;
   transform-style: preserve-3d;
 }
@@ -28,17 +29,18 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: white;
   line-height: 8rem;
-  color: #03446A;
   text-align: center;
   font-size: 3rem;
-  border-radius: .5rem;
   backface-visibility: hidden;
 }
 
-.card .back {
-  background: #03446A;
-  color: white;
+.card .front {
   transform: rotateY( 180deg );
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  border-radius: .5rem;
 }

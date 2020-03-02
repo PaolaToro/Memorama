@@ -4,14 +4,16 @@
     <span>{{time}}</span>
     <button (click)="startGame($event)">Iniciar</button>
   </header>
-  <section class="cards" (click)="handleClickOnCard($event)">
+  <section class="cards">
     <div class="row" *ngFor="let row of matrix">
       <div class="column" *ngFor="let column of row">
         <app-card
+          [id]="column.id"
+          [heroeId]="column.heroeId"
+          [active]="column.active"
+          [disabled]="!start || disabled || column.disabled"
           [back]="column.back"
           [front]="column.front"
-          [id]="column.id"
-          [disabled]="!start || disabled || column.disabled"
           (flip)="handleClickOnCard($event)"
         ></app-card>
       </div>

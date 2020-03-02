@@ -7,19 +7,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class CardComponent implements OnInit {
   @Input() id: number;
+  @Input() heroeId: number;
+
+  @Input() active: boolean;
+
+  @Input() disabled: boolean;
 
   @Input() back: string;
   @Input() front: string;
 
-  @Input() disabled: boolean;
-
   @Output() flip = new EventEmitter<number>();
-
-  active: boolean;
-
-  constructor() {
-    this.active = false;
-  }
 
   ngOnInit(): void {
   }
@@ -27,9 +24,9 @@ export class CardComponent implements OnInit {
   handleClick(event: Event) {
     event.stopPropagation();
 
-    this.active = !this.active;
-
-    this.flip.emit(this.id);
+    if (!this.disabled) {
+      this.flip.emit(this.id);
+    }
   }
 
 }

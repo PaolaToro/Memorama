@@ -27,6 +27,8 @@ const HEROES_ASSETS: readonly string[] = [
 
 interface Card {
   id: number;
+  heroeId: number;
+  active: boolean;
   disabled: boolean;
   back: string;
   front: string;
@@ -71,12 +73,14 @@ export class AppComponent {
 
     // The carsd is a array of resources where the back is a constant
     // and the front is an image of a heroe
-    const cards = new Array(this.rows * this.columns)
+    const cards: Card[] = new Array(this.rows * this.columns)
         .fill({})
         .map((_, i) => {
           const asset = cardsAssets[i];
           return ({
-            id: asset.id,
+            id: i,
+            heroeId: asset.id,
+            active: false,
             disabled: false,
             back: `${BASE_ASSET_PATH}/${COVER_ASSET}`,
             front: `${BASE_ASSET_PATH}/${asset.src}`
@@ -111,16 +115,33 @@ export class AppComponent {
     this.timer = setTimeout(() => { console.log('time finish'); }, INTERVAL_TIME);
   }
 
+  flipCard(id: number) {
+    this.matrix.forEach((row, rowId) => {
+      row.forEach((column, columnId) => {
+        if (column.id === id) {
+          this.matrix[rowId][columnId].active = true;
+        }
+      });
+    });
+  }
+
   handleClickOnCard(id: number) {
-    if (this.start) {
+    // If the game have start and we don't already clicked the card
+    if (this.start && !this.displayingCards.includes(id)) {
+
+      // We flip the card
+      this.flipCard(id);
+
+      // We add the card to the displaying control
       this.displayingCards.push(id);
 
       if (this.displayingCards.length > 1) {
         this.disabled = true;
+
       }
 
       // TODO: add the logic to decide what happen next
-      console.log('Click');
+      console.log('Click', id);
     }
   }
 }

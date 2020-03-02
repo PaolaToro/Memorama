@@ -3,6 +3,9 @@ import { CardComponent } from './card/card.component';
 
 import shuffleArray from './helpers/shuffle-array';
 
+// each player have 1 minute to play
+const INTERVAL_TIME = 60 * 1000;
+
 const BASE_ASSET_PATH = 'assets';
 
 const COVER_ASSET = 'tapa.jpg';
@@ -35,6 +38,13 @@ interface Card {
 export class AppComponent {
   title = 'Memorama';
 
+  timer = null;
+  time = '00:00';
+  start = false;
+
+  player1 = 0;
+  player2 = 0;
+
   // The size of the `HEROES_ASSETS` should be the half of `rows` * `columns`
   rows = 5;
   columns = 4;
@@ -45,7 +55,7 @@ export class AppComponent {
     this.matrix = this.generateCards();
   }
 
-  generateCards = (): Card[][] => {
+  generateCards(): Card[][] {
     const matrix = [];
 
     // The card assets are the doubles of cards
@@ -78,5 +88,15 @@ export class AppComponent {
     }
 
     return matrix;
+  }
+
+  startGame(event: Event) {
+    this.start = true;
+
+    this.startTimer();
+  }
+
+  startTimer() {
+    this.timer = setTimeout(() => { console.log('time finish'); }, INTERVAL_TIME);
   }
 }

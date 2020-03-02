@@ -1,4 +1,4 @@
-<div class="card" [ngClass]="{ 'active': active }" (click)="handleClick($event)">
+<div class="card" [ngClass]="{ 'active': active, 'disabled': disabled }" (click)="handleClick($event)">
   <div class="content">
     <div class="back">
       <img [src]="back" alt="Back">

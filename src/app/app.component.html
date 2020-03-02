@@ -1,9 +1,13 @@
 <main id="root">
-  <h2>Memorama</h2>
+  <header>
+    <h2>{{title}}</h2>
+    <span>{{time}}</span>
+    <button (click)="startGame($event)">Iniciar</button>
+  </header>
   <section class="cards">
     <div class="row" *ngFor="let row of matrix">
       <div class="column" *ngFor="let column of row">
-        <app-card [back]="column.back" [front]="column.front"></app-card>
+        <app-card [back]="column.back" [front]="column.front" [disabled]="!start" ></app-card>
       </div>
     </div>
   </section>

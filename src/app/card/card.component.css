@@ -5,6 +5,11 @@
   perspective: 50rem;
 }
 
+.card.disabled {
+  pointer-events: none;
+  z-index: -1;
+}
+
 .card .content {
   position: absolute;
   top: 0;

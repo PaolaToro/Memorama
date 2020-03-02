@@ -25,7 +25,7 @@ export class CardComponent implements OnInit {
     event.stopPropagation();
 
     if (!this.disabled) {
-      this.flip.emit(this.id);
+      this.flip.emit({ id: this.id, heroeId: this.heroeId });
     }
   }
 

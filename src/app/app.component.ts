@@ -48,16 +48,16 @@ export class AppComponent {
   start = false;
   disabled = false;
 
-  player1 = 0;
-  player2 = 0;
+  score: [number, number] = [0, 0];
 
   // The size of the `HEROES_ASSETS` should be the half of `rows` * `columns`
   rows = 5;
   columns = 4;
 
-  displayingCards = [];
+  displayingCards: Pick<Card, 'id' | 'heroeId'>[] = [];
 
   matrix: Card[][];
+  player = 0;
 
   constructor() {
     this.matrix = this.generateCards();
@@ -107,6 +107,8 @@ export class AppComponent {
 
   startGame(event: Event) {
     this.start = true;
+    // Start with Player 1
+    this.player = 0;
 
     this.startTimer();
   }
@@ -115,33 +117,59 @@ export class AppComponent {
     this.timer = setTimeout(() => { console.log('time finish'); }, INTERVAL_TIME);
   }
 
-  flipCard(id: number) {
+  restartTimer() {}
+
+  flipCard(id: number, state: boolean = true) {
     this.matrix.forEach((row, rowId) => {
       row.forEach((column, columnId) => {
         if (column.id === id) {
-          this.matrix[rowId][columnId].active = true;
+          this.matrix[rowId][columnId].active = state;
+          this.matrix[rowId][columnId].disabled = state;
         }
       });
     });
   }
 
-  handleClickOnCard(id: number) {
+  handleClickOnCard(card: Pick<Card, 'id' | 'heroeId'>) {
     // If the game have start and we don't already clicked the card
-    if (this.start && !this.displayingCards.includes(id)) {
+    if (this.start && !this.displayingCards.includes(card)) {
 
       // We flip the card
-      this.flipCard(id);
+      this.flipCard(card.id);
 
       // We add the card to the displaying control
-      this.displayingCards.push(id);
+      this.displayingCards.push(card);
 
+      // If already clicked 2 cards
       if (this.displayingCards.length > 1) {
-        this.disabled = true;
+        // If matches cards heroe id
+        if (this.displayingCards[0].heroeId === this.displayingCards[1].heroeId) {
+          // Update player score
+          this.score[this.player]++;
+          // Reset timer
+          this.restartTimer();
+          // Clean displaying cards
+          this.displayingCards = [];
+        } else {
+          this.disabled = true;
+          setTimeout(() => {
+            // Flip cards again
+            this.flipCard(this.displayingCards[0].id, false);
+            this.flipCard(this.displayingCards[1].id, false);
 
+            this.disabled = false;
+
+            // Clean displaying cards
+            this.displayingCards = [];
+
+            // Change player
+            this.player = this.player > 0 ? 0 : 1;
+          }, 2000)  ;
+        }
       }
 
       // TODO: add the logic to decide what happen next
-      console.log('Click', id);
+      console.log('Click', card);
     }
   }
 }

@@ -2,7 +2,10 @@
   <header>
     <h2>{{title}}</h2>
     <span>{{time}}</span>
+    <span>Player 1 {{score[0]}}</span>
+    <span>Player 2 {{score[1]}}</span>
     <button (click)="startGame($event)">Iniciar</button>
+    <p>Turno Player {{player + 1}}</p>
   </header>
   <section class="cards">
     <div class="row" *ngFor="let row of matrix">
